@@ -4,9 +4,7 @@ import time
 
 # Set the time limit in seconds
 TIME_LIMIT = 3600 # 1 hour
-
-# Set the password
-PASSWORD = "your_password"
+ONE_SECOND = 1000
 
 class TimeLimitApp(tk.Tk):
     def __init__(self):
@@ -15,7 +13,7 @@ class TimeLimitApp(tk.Tk):
         self.attributes("-topmost", True)
         self.protocol("WM_DELETE_WINDOW", self.on_closing)
         self.start_time = time.time()
-        self.after(1000, self.check_time_limit)
+        self.after(ONE_SECOND, self.check_time_limit)
         self.popup = None
 
     def check_time_limit(self):
@@ -23,7 +21,7 @@ class TimeLimitApp(tk.Tk):
         if elapsed_time >= TIME_LIMIT:
             self.display_popup()
         else:
-            self.after(1000, self.check_time_limit)
+            self.after(ONE_SECOND, self.check_time_limit)
 
     def display_popup(self):
         if self.popup is None or not self.popup.winfo_exists():
@@ -42,7 +40,7 @@ class TimeLimitApp(tk.Tk):
             self.popup.destroy()
             self.popup = None
         self.start_time = time.time()
-        self.after(1000, self.check_time_limit)
+        self.after(ONE_SECOND, self.check_time_limit)
 
     def on_closing(self):
         if messagebox.askokcancel("Quit", "Do you want to quit?"):
